@@ -15,6 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+if [ $(id -u) -ne 0 ]; then
+   echo "You must be root." 1>&2
+   exit 1
+fi
+
 # First run fstrim on all mounted filesystems that reside on block devices supporting discards.
 if ! command -v fstrim >/dev/null 2>&1 ; then
 	echo >&2 "fstrim is not available."
